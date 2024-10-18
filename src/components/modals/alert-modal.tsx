@@ -31,7 +31,7 @@ export const AlertModal: React.FC<AlertModalProps> = ({
       isOpen={isOpen}
       onClose={onClose}
       title="Are you sure?"
-      description="This will permanently delete your store."
+      description="This action cannot be undone."
     >
       <div className="pt-6 space-x-2 flex items-center justify-end w-full">
         <Button disabled={loading} variant={"outline"} onClick={onClose}>

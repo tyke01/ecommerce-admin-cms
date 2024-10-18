@@ -9,7 +9,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-
 import { AlertModal } from "@/components/modals/alert-modal";
 import { Button } from "@/components/ui/button";
 import {
@@ -73,7 +72,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
       }
 
       router.refresh();
-      router.push(`/${params.storeId}/billboards`)
+      router.push(`/${params.storeId}/billboards`);
       toast({
         title: "Success",
         description: toastMesage,
@@ -96,7 +95,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
         `/api/${params.storeId}/billboards/${params.billboardId}`
       );
       router.refresh();
-      router.push("/");
+      router.push(`/${params.storeId}/billboards`);
       toast({
         title: "Success",
         description: "billboard deleted successfully.",
@@ -187,7 +186,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
           </Button>
         </form>
       </Form>
-      <Separator className="my-4" />
+
     </div>
   );
 };
