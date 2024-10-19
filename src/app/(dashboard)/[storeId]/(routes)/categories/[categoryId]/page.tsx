@@ -1,27 +1,23 @@
-import { BillboardForm } from "./components/billboard-form";
+import { CategoryForm } from "./components/category-form";
 import prismadb from "@/lib/prismadb";
 
-const BillboardPage = async ({
-  params,
-}: {
-  params: { billboardId: string };
-}) => {
-  // If the billboardId is "new", skip querying the database
-  if (params.billboardId === "new") {
+const CategoryPage = async ({ params }: { params: { categoryId: string } }) => {
+  // If the categoryId is "new", skip querying the database
+  if (params.categoryId === "new") {
     return (
       <div className="flex flex-col">
         <div className="flex flex-1 space-y-4 p-8 pt-6">
           {/* Render an empty form for creating a new billboard */}
-          <BillboardForm initialData={null} />
+          <CategoryForm initialData={null} />
         </div>
       </div>
     );
   }
 
   // Otherwise, fetch the existing billboard data
-  const billboard = await prismadb.billboard.findUnique({
+  const category = await prismadb.category.findUnique({
     where: {
-      id: params.billboardId,
+      id: params.categoryId,
     },
   });
 
@@ -29,10 +25,10 @@ const BillboardPage = async ({
     <div className="flex flex-col">
       <div className="flex flex-1 space-y-4 p-8 pt-6">
         {/* Pass the fetched data for editing */}
-        <BillboardForm initialData={billboard} />
+        <CategoryForm initialData={category} />
       </div>
     </div>
   );
 };
 
-export default BillboardPage;
+export default CategoryPage;

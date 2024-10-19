@@ -23,7 +23,7 @@ import { Heading } from "@/components/ui/heading";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
-import ImageUpload from "./ui/image-upload";
+import ImageUpload from "../../../../../../../components/ui/image-upload";
 
 interface BillboardFormProps {
   initialData: Billboard | null;
@@ -186,7 +186,6 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
           </Button>
         </form>
       </Form>
-
     </div>
   );
 };

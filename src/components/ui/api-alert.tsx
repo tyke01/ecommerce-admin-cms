@@ -42,7 +42,7 @@ export const ApiAlert: React.FC<ApiAertProps> = ({
 
 
   return (
-    <Alert className="flex flex-col gap-y-4 items-start">
+    <Alert className="flex flex-col gap-y-4 items-start w-full">
       <div className="flex items-center gap-4">
         <Server className="h-4 w-4" />
         <AlertTitle className="flex items-center gap-x-2">
@@ -50,7 +50,7 @@ export const ApiAlert: React.FC<ApiAertProps> = ({
           <Badge variant={variantMap[variant]}>{textMap[variant]}</Badge>
         </AlertTitle>
       </div>
-      <AlertDescription className="flex items-center justify-between w-full">
+      <AlertDescription className="flex items-center justify-between w-full overflow-x-auto">
         <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
           {description}
         </code>

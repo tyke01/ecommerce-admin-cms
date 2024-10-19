@@ -1,6 +1,6 @@
 "use client";
 
-import { BillboardColumn } from "@/components/columns";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,6 +11,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { AlertModal } from "@/components/modals/alert-modal";
 import { useToast } from "@/hooks/use-toast";
+import { CategoryColumn } from "./columns";
+
 
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
@@ -18,7 +20,7 @@ import axios from "axios";
 import { useState } from "react";
 
 interface CellActionProps {
-  data: BillboardColumn;
+  data: CategoryColumn;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
@@ -39,9 +41,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(
-        `/api/${params.storeId}/billboards/${data.id}`
-      );
+      await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
       router.refresh();
       toast({
         title: "Success",
