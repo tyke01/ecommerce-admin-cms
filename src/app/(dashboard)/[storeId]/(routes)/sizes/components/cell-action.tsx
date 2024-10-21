@@ -1,6 +1,6 @@
 "use client";
 
-
+import { BillboardColumn } from "./columns";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,8 +11,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { AlertModal } from "@/components/modals/alert-modal";
 import { useToast } from "@/hooks/use-toast";
-import { CategoryColumn } from "./columns";
-
 
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
@@ -20,7 +18,7 @@ import axios from "axios";
 import { useState } from "react";
 
 interface CellActionProps {
-  data: CategoryColumn;
+  data: BillboardColumn;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
@@ -41,17 +39,17 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/categories/${data.id}`);
+      await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
       router.refresh();
       toast({
         title: "Success",
-        description: "category deleted successfully.",
+        description: "billboard deleted successfully.",
       });
     } catch (error) {
       toast({
         title: "Error",
         description:
-          "Error when deleting category. Make sure you remove all products in this category first",
+          "Error when deleting store. Make sure you remove all categories using this billboard first",
         variant: "destructive",
       });
     } finally {
@@ -84,7 +82,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
           <DropdownMenuItem
             onClick={() =>
-              router.push(`/${params.storeId}/categories/${data.id}`)
+              router.push(`/${params.storeId}/billboards/${data.id}`)
             }
           >
             <Edit className="mr-2 h-4 w-4" />

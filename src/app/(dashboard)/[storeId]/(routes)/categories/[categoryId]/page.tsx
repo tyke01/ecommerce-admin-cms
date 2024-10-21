@@ -1,34 +1,49 @@
 import { CategoryForm } from "./components/category-form";
 import prismadb from "@/lib/prismadb";
 
-const CategoryPage = async ({ params }: { params: { categoryId: string } }) => {
-  // If the categoryId is "new", skip querying the database
+const CategoryPage = async ({
+  params,
+}: {
+  params: { categoryId: string; storeId: string };
+}) => {
+  // If the categoryId is "new", don't query the database
   if (params.categoryId === "new") {
+    const billboards = await prismadb.billboard.findMany({
+      where: {
+        storeId: params.storeId,
+      },
+    }) || [];
+
     return (
       <div className="flex flex-col">
         <div className="flex flex-1 space-y-4 p-8 pt-6">
-          {/* Render an empty form for creating a new billboard */}
-          <CategoryForm initialData={null} />
+          <CategoryForm billboards={billboards} initialData={null} />
         </div>
       </div>
     );
   }
 
-  // Otherwise, fetch the existing billboard data
+  // Otherwise, fetch the existing category and billboard data
   const category = await prismadb.category.findUnique({
     where: {
       id: params.categoryId,
     },
   });
 
+  const billboards = await prismadb.billboard.findMany({
+    where: {
+      storeId: params.storeId,
+    },
+  }) || [];
+
   return (
     <div className="flex flex-col">
       <div className="flex flex-1 space-y-4 p-8 pt-6">
-        {/* Pass the fetched data for editing */}
-        <CategoryForm initialData={category} />
+        <CategoryForm billboards={billboards} initialData={category} />
       </div>
     </div>
   );
 };
 
 export default CategoryPage;
+
