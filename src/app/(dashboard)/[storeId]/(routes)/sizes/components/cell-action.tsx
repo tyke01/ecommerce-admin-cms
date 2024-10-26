@@ -1,6 +1,6 @@
 "use client";
 
-import { BillboardColumn } from "./columns";
+import { SizeColumn } from "./columns";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,7 +18,7 @@ import axios from "axios";
 import { useState } from "react";
 
 interface CellActionProps {
-  data: BillboardColumn;
+  data: SizeColumn;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
@@ -32,24 +32,24 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
     navigator.clipboard.writeText(id);
     toast({
       title: "Success",
-      description: "Billboard Id copied",
+      description: "Size Id copied",
     });
   };
 
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
+      await axios.delete(`/api/${params.storeId}/sizes/${data.id}`);
       router.refresh();
       toast({
         title: "Success",
-        description: "billboard deleted successfully.",
+        description: "size deleted successfully.",
       });
     } catch (error) {
       toast({
         title: "Error",
         description:
-          "Error when deleting store. Make sure you remove all categories using this billboard first",
+          "Error when deleting size. Make sure you remove all products using this size first",
         variant: "destructive",
       });
     } finally {
@@ -82,7 +82,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
           <DropdownMenuItem
             onClick={() =>
-              router.push(`/${params.storeId}/billboards/${data.id}`)
+              router.push(`/${params.storeId}/sizes/${data.id}`)
             }
           >
             <Edit className="mr-2 h-4 w-4" />

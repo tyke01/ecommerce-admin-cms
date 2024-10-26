@@ -18,6 +18,7 @@ model Store {
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
   Categories Category[]  @relation("StoreToCategory")
+  Color      Color[]     @relation("StoreToColor")
   sizes      Size[]      @relation("StoreToSize")
 }
 
@@ -52,6 +53,18 @@ model Size {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   storeId   String   @db.ObjectId
   store     Store    @relation("StoreToSize", fields: [storeId], references: [id])
+  name      String
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([storeId])
+}
+
+model Color {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  storeId   String   @db.ObjectId
+  store     Store    @relation("StoreToColor", fields: [storeId], references: [id])
   name      String
   value     String
   createdAt DateTime @default(now())
