@@ -18,7 +18,7 @@ model Store {
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
   Categories Category[]  @relation("StoreToCategory")
-  Color      Color[]     @relation("StoreToColor")
+  Colors      Color[]     @relation("StoreToColor")
   sizes      Size[]      @relation("StoreToSize")
 }
 
